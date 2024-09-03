@@ -1,23 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import LoginPage from './component/Login';
+import AdminHomepage from './component/HrHomepage';
+import Navbar from './component/NavBar';
+import CohortMemberRegistration from './component/CohortRegistration';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+      <div>
+        <LoginPage/>
+        <AdminHomepage/>
+        <CohortMemberRegistration/>
+      </div> 
+      {/* <Router>
+      <div>
+        <Routes>
+          <Route path="/" element={<LoginScreen />} />
+          <Route path="/admin-homepage" element={<><Navbar /><AdminHomepage /></>} />
+          <Route path="/cohort-member-registration" element={<><Navbar /><CohortMemberRegistration /></>} />
+        </Routes>
+      </div>
+    </Router> */}
     </div>
   );
 }
