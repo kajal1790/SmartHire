@@ -5,6 +5,8 @@ import LoginPage from './component/Login';
 import AdminHomepage from './component/HrHomepage';
 import Navbar from './component/NavBar';
 import CohortMemberRegistration from './component/CohortRegistration';
+import UpcomingInterview from './component/CohortMember/UpcomingInterview.js';
+import SelectAvailability from './component/CohortMember/SelectAvailability.js';
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
         <LoginPage/>
         <AdminHomepage/>
         <CohortMemberRegistration/>
-      </div> 
+        <UpcomingInterview/>
+        <SelectAvailability/>
+      </div>
       {/* <Router>
       <div>
         <Routes>
