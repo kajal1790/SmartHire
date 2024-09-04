@@ -2,14 +2,27 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Import default styles for the calendar
+import { useNavigate } from 'react-router-dom';
 
 const AdminHomepage = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const navigate = useNavigate();
+
   const highlightedDates = [
     new Date(2024, 8, 10),
     new Date(2024, 8, 15),
     new Date(2024, 8, 20),
   ];
+
+  const handleNewSchedule = () => {
+    // Implement login logic here
+    navigate('/create-new-schedule');
+  };
+
+  const handleCohortRegistration = () => {
+    // Implement login logic here
+    navigate('/cohort-member-registration');
+  };
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -27,8 +40,8 @@ const AdminHomepage = () => {
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <button style={styles.button}>Register Cohort Member</button>
-        <button style={styles.button}>Create New Interview Schedule</button>
+        <button onClick={handleCohortRegistration} style={styles.button}>Register Cohort Member</button>
+        <button onClick={handleNewSchedule} style={styles.button}>Create New Interview Schedule</button>
       </div>
 
       <div style={styles.calendarContainer}>
@@ -66,6 +79,7 @@ const styles = {
     width: '100%',
     maxWidth: '600px',
     marginBottom: '30px',
+    paddingTop: '70px'
   },
   button: {
     padding: '12px 20px',

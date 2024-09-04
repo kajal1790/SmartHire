@@ -81,6 +81,7 @@ container: {
     padding: '0 20px',
   },
   header: {
+    paddingTop: '90px',
     marginBottom: '30px',
     fontSize: '24px',
     color: '#333',
