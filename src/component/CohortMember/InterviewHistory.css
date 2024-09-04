@@ -4,6 +4,7 @@
   flex-direction: column;
   height: calc(100vh - 60px); /* Adjust height to account for navbar */
   padding: 20px;
+  textAlign: 'center';
 }
 
 .interview-history-grid {

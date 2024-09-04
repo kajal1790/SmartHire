@@ -41,7 +41,7 @@ const InterviewHistory = () => {
 
   return (
     <div className="interview-history-container">
-      <h1>Interview History</h1>
+      <h1 style={{ textAlign: 'center', padding: '20px' }}>Interview History</h1>
       <div
         className="ag-theme-alpine interview-history-grid"
       >

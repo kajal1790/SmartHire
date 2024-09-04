@@ -10,10 +10,10 @@ const CohortMemberHomePage = () => {
 
   return (
 
-    <div style={styles.container}>
+    <div>
 
       <Tabs selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
-        <TabList style={{ display: 'flex', justifyContent: 'center', padding: '50px', backgroundColor: '#007bff', color: '#ffffff'}}>
+        <TabList style={{ display: 'flex', justifyContent: 'center', padding: '60px 0 20px 0' , backgroundColor: '#007bff', color: '#ffffff'}}>
           <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Upcoming Interviews</Tab>
           <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Select Availability</Tab>
           <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Interview History</Tab>
