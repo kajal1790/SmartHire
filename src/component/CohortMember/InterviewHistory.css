@@ -1,0 +1,12 @@
+/* Ensure the container takes full available height */
+.interview-history-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); /* Adjust height to account for navbar */
+  padding: 20px;
+}
+
+.interview-history-grid {
+  flex: 1;
+  overflow: auto;
+}

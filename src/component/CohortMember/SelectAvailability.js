@@ -3,23 +3,22 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-// Helper function to generate time slots
+// Helper function to generate time slots with 1-hour intervals
 const generateTimeSlots = () => {
   const slots = [];
   for (let hour = 10; hour <= 17; hour++) {
-    slots.push(`${hour}:00`);
-    if (hour < 17) {
-      slots.push(`${hour}:30`);
-    }
+    const period = hour < 12 ? 'AM' : 'PM';
+    const hourIn12 = hour > 12 ? hour - 12 : hour;
+    slots.push(`${hourIn12}:00 ${period}`);
   }
   return slots;
 };
 
-// Generate dates for a week
-const generateDates = () => {
+// Generate dates starting from today for the next 7 days
+const generateDates = (numDays = 7) => {
   const today = new Date();
   const dates = [];
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < numDays; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     dates.push(date.toISOString().split('T')[0]); // Format as YYYY-MM-DD
@@ -28,8 +27,8 @@ const generateDates = () => {
 };
 
 // Generate initial grid data
-const generateGridData = () => {
-  const dates = generateDates();
+const generateGridData = (numDays = 7) => {
+  const dates = generateDates(numDays);
   const timeSlots = generateTimeSlots();
 
   return dates.map(date => ({
@@ -42,7 +41,7 @@ const generateGridData = () => {
 };
 
 const SelectAvailability = () => {
-  const [rowData, setRowData] = useState(generateGridData());
+  const [rowData, setRowData] = useState(() => generateGridData());
 
   // Handle slot change
   const handleSlotChange = (date, slot, isSelected) => {
@@ -83,14 +82,34 @@ const SelectAvailability = () => {
   };
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 600, width: '100%' }}>
-      <AgGridReact
-        columnDefs={columnDefs}
-        rowData={rowData}
-        domLayout="autoHeight"
-      />
-      <button onClick={handleSubmit} style={{ marginTop: '10px', padding: '10px' }}>
-        Submit
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <h1>Available Slots</h1>
+      <div
+        className="ag-theme-alpine"
+        style={{ height: 'auto', width: '100%', display: 'inline-block' }}
+      >
+        <AgGridReact
+          columnDefs={columnDefs}
+          rowData={rowData}
+          domLayout="autoHeight"
+        />
+      </div>
+      <button
+        onClick={handleSubmit}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        }}
+      >
+        Submit Available Slots
       </button>
     </div>
   );
@@ -99,7 +118,9 @@ const SelectAvailability = () => {
 // Custom cell renderer for time slots
 const TimeSlotRenderer = (props) => {
   const { value, onSlotChange } = props;
-  const [selected, setSelected] = React.useState(false);
+  const [selected, setSelected] = React.useState(
+    props.data.timeSlots.find(ts => ts.slot === value)?.selected || false
+  );
 
   const handleChange = (e) => {
     const isSelected = e.target.checked;
@@ -108,12 +129,30 @@ const TimeSlotRenderer = (props) => {
   };
 
   return (
-    <input
-      type="checkbox"
-      checked={selected}
-      onChange={handleChange}
-      style={{ margin: '0 auto', display: 'block' }}
-    />
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: selected ? 'green' : 'transparent',
+        color: selected ? 'white' : 'black',
+        borderRadius: '4px',
+        padding: '5px',
+        cursor: 'pointer',
+        height: '100%',
+        lineHeight: 'normal'
+      }}
+    >
+      <input
+        type="checkbox"
+        checked={selected}
+        onChange={handleChange}
+        style={{
+          marginRight: '5px'
+        }}
+      />
+      {value}
+    </div>
   );
 };
 
