@@ -5,29 +5,27 @@ import LoginPage from './component/Login';
 import AdminHomepage from './component/HrHomepage';
 import Navbar from './component/NavBar';
 import CohortMemberRegistration from './component/CohortRegistration';
-import UpcomingInterview from './component/CohortMember/UpcomingInterview.js';
-import SelectAvailability from './component/CohortMember/SelectAvailability.js';
+import CreateInterviewSchedule from './component/CreateInterviewSchedule';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <div>
+      {/* <div>
         <LoginPage/>
         <AdminHomepage/>
         <CohortMemberRegistration/>
-        <UpcomingInterview/>
-        <SelectAvailability/>
-      </div>
-      {/* <Router>
-      <div>
+        <CreateInterviewSchedule/>
+      </div>  */}
+      <Router>
         <Routes>
-          <Route path="/" element={<LoginScreen />} />
-          <Route path="/admin-homepage" element={<><Navbar /><AdminHomepage /></>} />
-          <Route path="/cohort-member-registration" element={<><Navbar /><CohortMemberRegistration /></>} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/admin-homepage" element={<AdminHomepage />}/>
+          <Route path="/cohort-member-registration" element={<CohortMemberRegistration/>} />
+          <Route path="/create-new-schedule" element={<CreateInterviewSchedule/>} />
         </Routes>
-      </div>
-    </Router> */}
+
+    </Router>
     </div>
   );
 }

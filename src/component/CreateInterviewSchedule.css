@@ -1,0 +1,82 @@
+.schedule-container {
+  padding: 20px;
+}
+
+.navbar {
+  background-color: #007bff;
+  padding: 15px;
+  color: white;
+}
+
+.navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.content {
+  margin: 30px 20px;
+  padding-top: 50px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.dropdowns label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.dropdowns select {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.time-slots h3,
+.interview-types h3 {
+  margin-top: 20px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.time-slot,
+.interview-types label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin-top: 30px;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.upload-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-button:hover {
+  background-color: #218838;
+}
+
+.download-template {
+  margin-left: 20px;
+  font-size: 16px;
+  color: #007bff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.download-template:hover {
+  text-decoration: underline;
+}

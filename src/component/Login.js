@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     // Implement login logic here
     console.log('Login clicked with:', { username, password });
+    navigate('/admin-homepage');
   };
 
   const handleSSOLogin = () => {
