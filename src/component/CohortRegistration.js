@@ -1,5 +1,6 @@
 // CohortMemberRegistration.js
 import React, { useState } from 'react';
+import Snackbar from '@mui/material/Snackbar';
 
 const CohortMemberRegistration = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,9 @@ const CohortMemberRegistration = () => {
     skillSet: '',
   });
 
+  const [open, setOpen] = useState(false);
+  const msg = "Member successfully registered"
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -17,10 +21,21 @@ const CohortMemberRegistration = () => {
     });
   };
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data Submitted:', formData);
   };
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
+
 
   return (
     <div style={styles.container}>
@@ -58,8 +73,16 @@ const CohortMemberRegistration = () => {
           onChange={handleChange}
           style={styles.input}
         />
-        <button type="submit" style={styles.button}>Register</button>
+        <button type="submit" style={styles.button} onClick={handleClick}>Register</button>
       </form>
+
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={msg}
+      />
     </div>
   );
 };

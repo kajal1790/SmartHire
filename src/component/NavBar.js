@@ -26,7 +26,7 @@ const styles = {
     zIndex: 1000,
   },
   navContent: {
-    maxWidth: '1200px',
+    // maxWidth: '1200px',
     width: '100%',
     margin: '0 auto',
   },

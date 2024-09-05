@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import './CreateInterviewSchedule.css';
-
+import Snackbar from '@mui/material/Snackbar';
 
 const CreateInterviewSchedule = () => {
   const hours = ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
+  const [open, setOpen] = useState(false);
+  const msg = "Cohort team notified about schedule"
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
+
 
   return (
     <div className="schedule-container">
@@ -41,6 +52,7 @@ const CreateInterviewSchedule = () => {
             </select>
           </label>
         </div>
+        <div className='interview-container'>
         <div className="time-slots">
           <h3>Select Time Slots:</h3>
           {hours.map((hour, index) => (
@@ -67,12 +79,23 @@ const CreateInterviewSchedule = () => {
             Design Interview
           </label>
         </div>
+
+        </div>
         <div className="actions">
-          <button className="upload-button">Upload Candidate Details</button>
-          <a href="#" className="download-template">&#x2193; Download Template</a>
-          <button className="upload-button">Submit</button>
+          <div>
+            <button className="upload-button">Upload Candidate Details</button>
+            <a href="#" className="download-template">&#x2193; Download Template</a>
+          </div>
+          <button className="upload-button" onClick={handleClick}>Submit</button>
         </div>
       </div>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={msg}
+      />
     </div>
   );
 };
