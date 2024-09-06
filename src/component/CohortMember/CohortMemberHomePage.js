@@ -13,10 +13,10 @@ const CohortMemberHomePage = () => {
     <div>
 
       <Tabs selectedIndex={selectedIndex} onSelect={index => setSelectedIndex(index)}>
-        <TabList style={{ display: 'flex', justifyContent: 'center', padding: '60px 0 20px 0' , backgroundColor: '#007bff', color: '#ffffff'}}>
-          <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Upcoming Interviews</Tab>
-          <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Select Availability</Tab>
-          <Tab style={{ margin: '0 10px', cursor: 'pointer' }}>Interview History</Tab>
+        <TabList style={{ display: 'flex', justifyContent: 'center', padding: '60px 0px 20px 0' , backgroundColor: 'darkslategray', color: '#ffffff', marginTop: '10px'}}>
+          <Tab style={{ margin: '0 10px', cursor: 'pointer', border: 'none', borderRadius: 2, borderColor: '#fff'}}>Upcoming Interviews</Tab>
+          <Tab style={{ margin: '0 10px', cursor: 'pointer', border: 'none', borderRadius: 2, borderColor: '#fff' }}>Select Availability</Tab>
+          <Tab style={{ margin: '0 10px', cursor: 'pointer', border: 'none', borderRadius: 2, borderColor: '#fff' }}>Interview History</Tab>
         </TabList>
 
         <TabPanel>

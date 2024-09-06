@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import './SelectAvailability.css';
+import Snackbar from '@mui/material/Snackbar';
 
 // Helper function to generate time slots with 1-hour intervals
 const generateTimeSlots = () => {
@@ -42,6 +44,14 @@ const generateGridData = (numDays = 7) => {
 
 const SelectAvailability = () => {
   const [rowData, setRowData] = useState(() => generateGridData());
+  const [clickedCells, setClickedCells] = useState([]);
+
+  // grid reference
+  const gridRef = useRef(null);
+
+  // snackbar dialog
+  const [open, setOpen] = useState(false);
+  const msg = "Member successfully registered"
 
   // Handle slot change
   const handleSlotChange = (date, slot, isSelected) => {
@@ -71,6 +81,7 @@ const SelectAvailability = () => {
   ];
 
   const handleSubmit = () => {
+    setOpen(true);
     const selectedSlots = rowData.flatMap(row =>
       row.timeSlots.filter(ts => ts.selected).map(ts => ({
         date: row.date,
@@ -81,6 +92,39 @@ const SelectAvailability = () => {
     // Implement submission logic here
   };
 
+  const onCellClicked = (params) => {
+    const newClickedCell = {
+      rowIndex: params.rowIndex,
+      colId: params.column.colId
+    };
+
+    setClickedCells((prev) => {
+      const alreadyClicked = prev.some(
+        (cell) =>
+          cell.rowIndex === newClickedCell.rowIndex &&
+          cell.colId === newClickedCell.colId
+      );
+      if (alreadyClicked) return prev; 
+      return [...prev, newClickedCell]; 
+    });
+
+   
+    gridRef.current.api.refreshCells();
+  };
+
+  const cellClassRules = {
+    'clicked-cell': (params) =>
+      clickedCells.some(
+        (cell) =>
+          cell.rowIndex === params.node.rowIndex &&
+          cell.colId === params.column.colId
+      )
+  };
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
+
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
       <h1>Available Slots</h1>
@@ -89,9 +133,14 @@ const SelectAvailability = () => {
         style={{ height: 'auto', width: '100%', display: 'inline-block' }}
       >
         <AgGridReact
-          columnDefs={columnDefs}
+          ref={gridRef} 
+          columnDefs={columnDefs.map((col) => ({
+            ...col,
+            cellClassRules
+          }))}
           rowData={rowData}
           domLayout="autoHeight"
+          onCellClicked={onCellClicked}
         />
       </div>
       <button
@@ -109,8 +158,16 @@ const SelectAvailability = () => {
           marginRight: 'auto'
         }}
       >
-        Submit Available Slots
+        Submit
       </button>
+
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={msg}
+      />
     </div>
   );
 };
@@ -157,3 +214,4 @@ const TimeSlotRenderer = (props) => {
 };
 
 export default SelectAvailability;
+

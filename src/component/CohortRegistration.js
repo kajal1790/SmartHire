@@ -78,7 +78,7 @@ const CohortMemberRegistration = () => {
 
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        anchorOrigin={{ vertical: 'center', horizontal: 'center' }}
         autoHideDuration={3000}
         onClose={handleClose}
         message={msg}

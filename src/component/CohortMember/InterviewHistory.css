@@ -2,9 +2,10 @@
 .interview-history-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px); /* Adjust height to account for navbar */
   padding: 20px;
-  textAlign: 'center';
+  text-align: 'center';;
+  max-width: 100%;
+  margin: 0px 160px 
 }
 
 .interview-history-grid {

@@ -8,14 +8,21 @@ import './UpcomingInterview.css';
 const interviewData = {
   '2024-09-05': [
     { time: '10:00 AM', candidate: 'Alice Johnson' },
-    { time: '11:00 AM', candidate: 'Bob Smith' }
+    { time: '11:00 AM', candidate: 'Bob Smith' },
+    { time: '04:00 PM', candidate: 'Charlie Brown' },
+    { time: '05:00 PM', candidate: 'Diana Ross' },
   ],
   '2024-09-06': [
     { time: '09:00 AM', candidate: 'Charlie Brown' },
-    { time: '01:00 PM', candidate: 'Diana Ross' }
+    { time: '01:00 PM', candidate: 'Diana Ross' },
+    { time: '04:00 PM', candidate: 'Charlie Brown' }
   ],
   '2024-09-07': [
-    { time: '02:00 PM', candidate: 'Eva Green' }
+    { time: '02:00 PM', candidate: 'Eva Green' },
+    { time: '03:00 PM', candidate: 'Charlie Brown' },
+    { time: '04:00 PM', candidate: 'Charlie Brown' },
+    { time: '05:00 PM', candidate: 'Diana Ross' },
+    
   ]
 };
 
@@ -91,19 +98,23 @@ const UpcomingInterview = () => {
   };
 
   return (
-    <div className="UpcomingInterview" ref={containerRef} style={{ width: '100%', height: '100vh' }}>
-      <h2 className= "header">Upcoming Schedule</h2>
-      <div
-        className="ag-theme-alpine"
-        style={{ height: calculateGridHeight(dateRowData.length), width: gridDimensions.width }}
-      >
-        <AgGridReact
-          columnDefs={dateColumnDefs}
-          rowData={dateRowData}
-          onRowClicked={handleRowClick}
-        />
+    <div className="UpcomingInterview" ref={containerRef} style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+      <div style={{width: '35%'}}>
+        <h2 className= "header">Upcoming Schedule</h2>
+        <div
+          className="ag-theme-alpine"
+          style={{ height: calculateGridHeight(dateRowData.length)}}
+        >
+          <AgGridReact
+            columnDefs={dateColumnDefs}
+            rowData={dateRowData}
+            onRowClicked={handleRowClick}
+          />
+        </div>
       </div>
-      {selectedDate && <DateDetails date={selectedDate} interviews={interviewData[selectedDate]} columnDefs={interviewColumnDefs} />}
+      <div style={{width: '35%'}}>
+          {selectedDate && <DateDetails date={selectedDate} interviews={interviewData[selectedDate]} columnDefs={interviewColumnDefs} />}
+      </div>
     </div>
   );
 };
@@ -140,7 +151,7 @@ const DateDetails = ({ date, interviews, columnDefs }) => {
       <h2 className = "header">Interviews on {date}</h2>
       <div
         className="ag-theme-alpine"
-        style={{ height: calculateGridHeight(interviews.length), width: gridDimensions.width }}
+        style={{ height: calculateGridHeight(interviews.length) }}
       >
         <AgGridReact
           columnDefs={columnDefs}

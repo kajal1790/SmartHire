@@ -13,3 +13,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.clicked-cell {
+  background-color: #bec6c6;
+}

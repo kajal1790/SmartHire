@@ -2,6 +2,7 @@ import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
+import './InterviewHistory.css';
 
 // Sample data for interviews
 const generateInterviewData = () => {
@@ -41,7 +42,7 @@ const InterviewHistory = () => {
 
   return (
     <div className="interview-history-container">
-      <h1 style={{ textAlign: 'center', padding: '20px' }}>Interview History</h1>
+      <h1 style={{ textAlign: 'center' }}>Interview History</h1>
       <div
         className="ag-theme-alpine interview-history-grid"
       >
